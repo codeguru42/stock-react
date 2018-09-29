@@ -16,8 +16,24 @@ class App extends Component {
   onSubmit = values => {
     const {symbol} = values;
     d3.json(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=942TX8GNKGBPPZ1J`)
-      .then(data => {
-        this.setState({data: data['Time Series (5min)']});
+      .then(response => {
+        const parseTime = d3.timeParse('%Y-%m-%d %H:%M:%S');
+        const time_series = response['Time Series (5min)'];
+        const data = Object.keys(time_series).sort().map(
+          function (key) {
+            const data = time_series[key];
+            return {
+              time: parseTime(key),
+              open: Number(data['1. open']),
+              high: Number(data['2. high']),
+              low: Number(data['3. low']),
+              close: Number(data['4. close']),
+              volume: Number(data['5. volume']),
+            };
+          }
+        );
+
+        this.setState({data: data});
       });
   };
 
@@ -30,7 +46,9 @@ class App extends Component {
         <Controls
           onSubmit={this.onSubmit}
         />
-        <Chart/>
+        <Chart
+          data={this.state.data}
+        />
       </div>
     );
   }
