@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import * as PropTypes from "prop-types";
 
 export class Controls extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -16,10 +21,6 @@ export class Controls extends Component {
     })
   };
 
-  onSubmit = () => {
-    alert(`symbol:${this.state.symbol}`);
-  };
-
   render() {
     return (
       <div>
@@ -30,7 +31,7 @@ export class Controls extends Component {
         />
         <Button
           variant={'contained'}
-          onClick={this.onSubmit}
+          onClick={() => this.props.onSubmit(this.state)}
         >
           Submit
         </Button>
