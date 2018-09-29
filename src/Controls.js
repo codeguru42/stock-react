@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import * as PropTypes from "prop-types";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import * as PropTypes from "prop-types";
 
 export class Controls extends Component {
   static propTypes = {
