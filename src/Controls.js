@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import * as PropTypes from "prop-types";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -11,14 +11,22 @@ export class Controls extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      symbol: '',
+      input: {
+        symbol: '',
+      }
     }
   }
 
   onChange = (key, value) => {
     this.setState(state => {
-      return {...state, [key]: value}
-    })
+      return {
+        ...state,
+        input: {
+          ...state.input,
+          [key]: value
+        }
+      }
+    });
   };
 
   render() {
@@ -31,7 +39,7 @@ export class Controls extends Component {
         />
         <Button
           variant={'contained'}
-          onClick={() => this.props.onSubmit(this.state)}
+          onClick={() => this.props.onSubmit(this.state.input)}
         >
           Submit
         </Button>
