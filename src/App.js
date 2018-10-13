@@ -13,7 +13,6 @@ class App extends Component {
     }
   }
 
-
   onSubmit = values => {
     const {symbol} = values;
     d3.json(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=942TX8GNKGBPPZ1J`)
