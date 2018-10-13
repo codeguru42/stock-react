@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as d3 from "d3";
 import './App.css';
+import AppBar from "@material-ui/core/es/AppBar/AppBar";
 import {Controls} from "./Controls";
 import {Chart} from "./Chart";
 
@@ -40,9 +41,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <AppBar position={'static'}>
           <h1 className="App-title">Stock Price Visualizations</h1>
-        </header>
+        </AppBar>
         <Controls
           onSubmit={this.onSubmit}
         />
