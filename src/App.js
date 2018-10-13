@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as d3 from "d3";
 import './App.css';
 import AppBar from "@material-ui/core/es/AppBar/AppBar";
+import * as constants from "./constants";
 import {Controls} from "./Controls";
 import {Chart} from "./Chart";
 
@@ -15,7 +16,7 @@ class App extends Component {
 
   onSubmit = values => {
     const {symbol} = values;
-    d3.json(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=942TX8GNKGBPPZ1J`)
+    d3.json(`${constants.INTRADAY_URL}&symbol=${symbol}`)
       .then(response => {
         const parseTime = d3.timeParse('%Y-%m-%d %H:%M:%S');
         const time_series = response['Time Series (5min)'];
