@@ -30,11 +30,18 @@ export class Controls extends Component {
     });
 
     fetch(`${constants.SEARCH_URL}&keywords=${value}`)
-      .then(results => {
-        return results.json();
+      .then(response => {
+        return response.json();
       })
-      .then(matches => {
-        this.setState({matches: matches.bestMatches});
+      .then(results => {
+        const matches = results.bestMatches.map(match => {
+          return {
+            symbol: match['1. symbol'],
+            name: match['2. name'],
+          }
+        });
+
+        this.setState({matches});
       });
   };
 
