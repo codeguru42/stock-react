@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as PropTypes from "prop-types";
+import * as constants from "./constants";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
@@ -27,6 +28,14 @@ export class Controls extends Component {
         }
       }
     });
+
+    fetch(`${constants.SEARCH_URL}&keywords=${value}`)
+      .then(results => {
+        return results.json();
+      })
+      .then(matches => {
+        this.setState({matches: matches.bestMatches});
+      });
   };
 
   render() {
